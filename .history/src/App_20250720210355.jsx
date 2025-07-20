@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Users,
-  TrendingUp,
-  FileText,
-  Shield,
-  Building2,
-  Home,
-  Calendar,
-  Download,
-  MapPin,
-  Phone,
-  Mail,
-  Clock
-} from 'lucide-react';
+import { ArrowRight, Users, TrendingUp, Award, Phone, Mail, MapPin, Clock, Menu, X, Home, Info, FileText, UserCheck, MessageSquare, Star, Shield, Leaf, Building2, Calendar, ChevronDown, Download } from 'lucide-react';
 import AdminApp from './components/AdminApp';
 import { useSpring, animated } from '@react-spring/web';
-import { HeroDemo1 } from './components/blocks/demo';
-import AboutSection from './components/blocks/about';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { HeroDemo1 } from "./components/blocks/demo";
 
+function AboutSection() {
+  return (
+    <section className="relative w-full h-[80vh] flex items-center justify-center text-white overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/Banner.jpg"
+          alt="About background"
+          className="w-full h-full object-cover opacity-40"
+        />
+      </div>
+
+      {/* Overlay content */}
+      <div className="relative z-10 max-w-4xl text-center px-4">
+        <h2 className="text-4xl font-bold mb-4">About Braybank</h2>
+        <p className="text-lg">
+          Discover a serene riverside community in the heart of Berkshire.
+        </p>
+      </div>
+    </section>
+  );
+}
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
 
   useEffect(() => {
@@ -38,25 +49,29 @@ function App() {
     }
   }, []);
 
+  const fadeInButtons = useSpring({ from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 }, delay: 200 });
+
   const stats = [
-    { number: '62', label: 'Properties', icon: Building2 },
-    { number: '48', label: 'Apartments', icon: Home },
-    { number: '14', label: 'Townhouses', icon: Building2 },
-    { number: '5', label: 'Board Directors', icon: Users }
+    { number: "62", label: "Properties", icon: Building2 },
+    { number: "48", label: "Apartments", icon: Home },
+    { number: "14", label: "Townhouses", icon: Building2 },
+    { number: "5", label: "Board Directors", icon: Users }
   ];
 
-  const statAnimations = stats.map((_, index) =>
+  const statAnimations = stats.map((_, index) => (
     useSpring({ from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0 }, delay: index * 200 })
-  );
+  ));
 
   if (showAdmin) return <AdminApp />;
 
   return (
     <div>
-      <div className="overflow-x-hidden">
-        <HeroDemo1 />
-      </div>
+      {/* Inside your Hero Section button JSX */}
+          <div className="overflow-x-hidden">
+      <HeroDemo1 />
+    </div>
 
+      {/* Stats Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -73,8 +88,151 @@ function App() {
         </div>
       </section>
 
-      <AboutSection />
+      {/* About Section */}
+      <section id="about" className="py-24 bg-gradient-to-b from-slate-50 to-white">
+        <AboutSection /></section>
 
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+            <div className="space-y-6">
+              <h3 className="text-3xl font-light text-slate-900 mb-8">Our Heritage & Location</h3>
+              <p className="text-slate-600 leading-relaxed font-light">
+                The Braybank Estate is situated on the banks of the River Thames at Bray, about two miles south of the centre of Maidenhead in Berkshire. It is also about one mile from Junction 8/9 of the motorway M4, 13 miles south from Junction 4 of the motorway M40 and about 26 miles to the west of central London.
+              </p>
+              <p className="text-slate-600 leading-relaxed font-light">
+                The estate comprises 62 leasehold properties: 48 apartments and 14 townhouses, with beautifully landscaped gardens. Originally the site of Braymead private house, later the Braymead Court Hotel and Hotel de Paris (1920s-40s), it was redeveloped into the current estate in 1964.
+              </p>
+              <div className="pt-6">
+                <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                  Learn More About Our History
+                </button>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-slate-600/20 rounded-3xl transform rotate-3"></div>
+              <img 
+                src="/Banner.jpg"
+                alt="Braybank Estate" 
+                className="relative rounded-3xl shadow-2xl w-full transform -rotate-1 hover:rotate-0 transition-transform duration-500"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-20">
+            {[
+              {
+                icon: Users,
+                title: "Ownership & Governance",
+                description: "Owned by Braybank Estates Limited, where each leaseholder holds one share. Managed by a volunteer board of elected directors.",
+                color: "blue"
+              },
+              {
+                icon: Award,
+                title: "Property Management",
+                description: "Day-to-day operations handled by John Mortimer Property Management Ltd with dedicated property manager support.",
+                color: "green"
+              },
+              {
+                icon: TrendingUp,
+                title: "Community Life",
+                description: "Residents enjoy community gatherings including summer BBQs and Christmas carols, following clear community guidelines.",
+                color: "purple"
+              }
+            ].map((item, index) => (
+              <div key={index} className="group">
+                <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100">
+                  <div className={`bg-gradient-to-br ${
+                    item.color === 'blue' ? 'from-blue-100 to-blue-50' :
+                    item.color === 'green' ? 'from-green-100 to-green-50' :
+                    'from-purple-100 to-purple-50'
+                  } w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <item.icon className={`h-8 w-8 ${
+                      item.color === 'blue' ? 'text-blue-600' :
+                      item.color === 'green' ? 'text-green-600' :
+                      'text-purple-600'
+                    }`} />
+                  </div>
+                  <h3 className="text-xl font-medium text-slate-900 mb-4 text-center">{item.title}</h3>
+                  <p className="text-slate-600 text-center leading-relaxed font-light">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Where We Are Section */}
+          <div className="bg-white p-12 rounded-3xl shadow-2xl border border-slate-100">
+            <h3 className="text-3xl font-light text-slate-900 mb-12 text-center">Where We Are</h3>
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2485.8234567890123!2d-0.7123456789012345!3d51.5123456789012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48767d1234567890%3A0x1234567890abcdef!2sBraybank%20Estate%2C%20Bray%2C%20Maidenhead!5e0!3m2!1sen!2suk!4v1234567890123!5m2!1sen!2suk"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Braybank Estate Location"
+                ></iframe>
+              </div>
+              <div className="space-y-8">
+                <div className="bg-slate-50 p-6 rounded-2xl">
+                  <h4 className="font-medium text-slate-900 mb-4 flex items-center">
+                    <MapPin className="h-5 w-5 text-blue-600 mr-2" />
+                    Estate Address
+                  </h4>
+                  <div className="text-slate-600 space-y-1 font-light">
+                    <p>Braybank Estate</p>
+                    <p>River Thames at Bray</p>
+                    <p>Near Maidenhead</p>
+                    <p>Berkshire, England</p>
+                  </div>
+                </div>
+                <div className="bg-slate-50 p-6 rounded-2xl">
+                  <h4 className="font-medium text-slate-900 mb-4 flex items-center">
+                    <Clock className="h-5 w-5 text-blue-600 mr-2" />
+                    Transport Links
+                  </h4>
+                  <ul className="text-slate-600 space-y-2 font-light">
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      1 mile from M4 Junction 8/9
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      13 miles from M40 Junction 4
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      26 miles west of Central London
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      2 miles south of Maidenhead centre
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Do's and Don'ts Section */}
+          <div className="mt-16 bg-gradient-to-r from-blue-600 to-slate-700 p-12 rounded-3xl text-center shadow-2xl">
+            <h3 className="text-2xl font-light text-white mb-6">Community Guidelines</h3>
+            <p className="text-blue-100 text-lg font-light mb-8 max-w-3xl mx-auto">
+              For more detail of the organisation and administration of Braybank, see our comprehensive community guidelines
+            </p>
+            <a 
+              href="https://www.braybank.info/Landlord's%20Regulations%20A4%20V4ma.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-white text-slate-900 px-8 py-3 rounded-full hover:bg-slate-100 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              View Do's and Don'ts Guide
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Documents Section */}
       <section id="documents" className="py-24 bg-white">
@@ -466,7 +624,7 @@ function App() {
         </div>
       </footer>
     </div>
-  );  
+  );
 }
 
 export default App;

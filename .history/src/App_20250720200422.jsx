@@ -1,0 +1,975 @@
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Users, TrendingUp, Award, Phone, Mail, MapPin, Clock, Menu, X, Home, Info, FileText, UserCheck, MessageSquare, Star, Shield, Leaf, Building2, Calendar, ChevronDown, Download } from 'lucide-react';
+import AdminApp from './components/AdminApp';
+import { useSpring, animated } from '@react-spring/web';
+
+
+function App() {
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Check if we should show admin panel
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === 'true') {
+      setShowAdmin(true);
+    }
+  }, []);
+
+  if (showAdmin) {
+    return <AdminApp />;
+  }
+
+  if (currentPage === 'newsletters') {
+    return (
+      <div className="min-h-screen bg-white">
+        {/* Header */}
+        <header className="bg-white shadow-sm border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-20">
+              <button
+                onClick={() => setCurrentPage('home')}
+                className="flex items-center text-gray-700 hover:text-blue-600 transition-colors font-medium"
+              >
+                <Home className="h-4 w-4 mr-2" />
+                Back to Home
+              </button>
+              <h1 className="text-2xl font-light text-gray-900">Community Newsletters</h1>
+              <div></div>
+            </div>
+          </div>
+        </header>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Current Newsletters Section */}
+          <section className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-light text-slate-900 mb-4">Current Newsletters</h2>
+              <div className="w-16 h-1 bg-blue-600 mx-auto mb-6"></div>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+                Latest community updates and important announcements
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Community Newsletter - January 2024",
+                  date: "January 15, 2024",
+                  size: "2.4 MB",
+                  description: "Monthly community updates, upcoming events, and important announcements for the new year.",
+                  featured: true
+                },
+                {
+                  title: "Winter Maintenance Update",
+                  date: "December 28, 2023",
+                  size: "1.8 MB",
+                  description: "Important updates on winter maintenance schedules and emergency procedures.",
+                  featured: false
+                },
+                {
+                  title: "Holiday Events Summary",
+                  date: "December 20, 2023",
+                  size: "3.1 MB",
+                  description: "Recap of our wonderful holiday celebrations and upcoming New Year activities.",
+                  featured: false
+                }
+              ].map((newsletter, index) => (
+                <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-slate-100 overflow-hidden">
+                  {newsletter.featured && (
+                    <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-2 text-sm font-medium">
+                      Latest Issue
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-green-100 p-3 rounded-xl">
+                        <FileText className="h-6 w-6 text-green-600" />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-xs text-slate-500">{newsletter.date}</div>
+                        <div className="text-xs text-slate-500">{newsletter.size}</div>
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-medium text-slate-900 mb-3">{newsletter.title}</h3>
+                    <p className="text-slate-600 text-sm mb-4 leading-relaxed">{newsletter.description}</p>
+                    <button className="w-full flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                      <Download className="h-4 w-4 mr-2" />
+                      Download PDF
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Old Newsletters Section */}
+          <section>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-light text-slate-900 mb-4">Newsletter Archive</h2>
+              <div className="w-16 h-1 bg-slate-400 mx-auto mb-6"></div>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+                Browse our collection of past newsletters and community updates
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+              <div className="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                <h3 className="text-lg font-medium text-slate-900">2023 Archives</h3>
+              </div>
+              <div className="divide-y divide-slate-100">
+                {[
+                  {
+                    title: "Community Newsletter - November 2023",
+                    date: "November 15, 2023",
+                    size: "2.1 MB",
+                    description: "Autumn updates, maintenance schedules, and holiday preparations."
+                  },
+                  {
+                    title: "Community Newsletter - September 2023",
+                    date: "September 15, 2023",
+                    size: "2.8 MB",
+                    description: "Back to school season updates and community garden project launch."
+                  },
+                  {
+                    title: "Summer BBQ Special Edition",
+                    date: "August 20, 2023",
+                    size: "4.2 MB",
+                    description: "Photo highlights and memories from our annual summer BBQ celebration."
+                  },
+                  {
+                    title: "Community Newsletter - July 2023",
+                    date: "July 15, 2023",
+                    size: "1.9 MB",
+                    description: "Summer activities, pool maintenance updates, and safety reminders."
+                  },
+                  {
+                    title: "Community Newsletter - May 2023",
+                    date: "May 15, 2023",
+                    size: "2.3 MB",
+                    description: "Spring cleaning initiatives and landscaping improvements."
+                  },
+                  {
+                    title: "Community Newsletter - March 2023",
+                    date: "March 15, 2023",
+                    size: "2.0 MB",
+                    description: "Annual meeting recap and upcoming spring projects."
+                  }
+                ].map((newsletter, index) => (
+                  <div key={index} className="p-6 hover:bg-slate-50 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="bg-slate-100 p-2 rounded-lg">
+                          <FileText className="h-5 w-5 text-slate-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-slate-900 mb-1">{newsletter.title}</h4>
+                          <p className="text-sm text-slate-600 mb-2">{newsletter.description}</p>
+                          <div className="flex items-center space-x-4 text-xs text-slate-500">
+                            <span className="flex items-center">
+                              <Calendar className="h-3 w-3 mr-1" />
+                              {newsletter.date}
+                            </span>
+                            <span>{newsletter.size}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button className="flex items-center px-3 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-sm">
+                        <Download className="h-4 w-4 mr-1" />
+                        Download
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8">
+              <a href="#home" className={`flex items-center transition-colors font-medium ${
+                scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+              }`}>
+                <Home className="h-4 w-4 mr-2" />
+                Home
+              </a>
+              <a href="#about" className={`flex items-center transition-colors font-medium ${
+                scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+              }`}>
+                <Info className="h-4 w-4 mr-2" />
+                About
+              </a>
+              <a href="#documents" className={`flex items-center transition-colors font-medium ${
+                scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+              }`}>
+                <FileText className="h-4 w-4 mr-2" />
+                Documents
+              </a>
+              <a href="#directors" className={`flex items-center transition-colors font-medium ${
+                scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+              }`}>
+                <UserCheck className="h-4 w-4 mr-2" />
+                Directors
+              </a>
+              <a href="#contact" className={`flex items-center transition-colors font-medium ${
+                scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
+              }`}>
+                <MessageSquare className="h-4 w-4 mr-2" />
+                Contact
+              </a>
+            </nav>
+
+            <div className="hidden lg:flex items-center space-x-4">
+              <button className="bg-blue-600 text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                Resident Login
+              </button>
+              <button 
+                onClick={() => setShowAdmin(true)}
+                className="text-white hover:text-blue-600 transition-colors text-sm font-medium border-2 border-blue-600 px-4 py-2 rounded-full hover:bg-blue-600 hover:text-white"
+              >
+                Admin
+              </button>
+            </div>
+
+            {/* Mobile menu button */}
+            <button 
+              className="lg:hidden p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="lg:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-md">
+              <nav className="flex flex-col space-y-4">
+                <a href="#home" className="flex items-center text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                  <Home className="h-4 w-4 mr-2" />
+                  Home
+                </a>
+                <a href="#about" className="flex items-center text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                  <Info className="h-4 w-4 mr-2" />
+                  About
+                </a>
+                <a href="#documents" className="flex items-center text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                  <FileText className="h-4 w-4 mr-2" />
+                  Documents
+                </a>
+                <a href="#directors" className="flex items-center text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                  <UserCheck className="h-4 w-4 mr-2" />
+                  Directors
+                </a>
+                <a href="#contact" className="flex items-center text-gray-700 hover:text-blue-600 transition-colors font-medium">
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  Contact
+                </a>
+                <button className="bg-blue-600 text-white px-6 py-2.5 rounded-full hover:bg-blue-700 transition-colors font-medium w-fit">
+                  Resident Login
+                </button>
+              </nav>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section id="home" className="relative overflow-hidden">
+        <div 
+          className="h-screen bg-cover bg-center relative"
+          style={{
+            backgroundImage: 'url(/Banner.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-800/70 to-slate-900/50"></div>
+          
+          <div className="relative z-10 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="max-w-4xl">
+                <div className="mb-6">
+                  <span className="inline-block bg-blue-600/20 text-blue-200 px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm border border-blue-400/30">
+                    Premium Riverside Living
+                  </span>
+                </div>
+                <div className="mb-8">
+                  <img 
+                    src="/BraybankLogo-nobg.png" 
+                    alt="Braybank Estates Limited" 
+                    className="h-32 md:h-40 lg:h-48 mx-auto md:mx-0 filter brightness-0 invert"
+                  />
+                </div>
+                <p className="text-xl md:text-2xl text-slate-200 mb-12 leading-relaxed max-w-2xl font-light">
+                  An exclusive private residential leasehold estate along the River Thames in Bray, near Maidenhead, Berkshire
+                </p>
+               const fadeIn = useSpring({ from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 }, delay: 200 });
+
+<animated.div style={fadeIn} className="flex flex-col sm:flex-row gap-6">
+  <button className="group bg-white text-slate-900 px-8 py-4 rounded-full hover:bg-slate-100 transition-all duration-300 flex items-center justify-center font-medium text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+    Explore Our Community
+    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+  </button>
+  <button className="border-2 border-white/50 text-white px-8 py-4 rounded-full hover:bg-white hover:text-slate-900 transition-all duration-300 font-medium text-lg backdrop-blur-sm">
+    View Properties
+  </button>
+</animated.div>
+
+              </div>
+            </div>
+          </div>
+
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <ChevronDown className="h-6 w-6" />
+          </div>
+        </div>
+      </section>
+
+      {/* Key Features Bar */}
+      <section className="bg-slate-900 text-white py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="flex items-center justify-center space-x-2">
+              <Building2 className="h-5 w-5 text-blue-400" />
+              <span className="text-sm font-medium">62 Properties</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <Leaf className="h-5 w-5 text-green-400" />
+              <span className="text-sm font-medium">Riverside Location</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <Shield className="h-5 w-5 text-blue-400" />
+              <span className="text-sm font-medium">Secure Estate</span>
+            </div>
+            <div className="flex items-center justify-center space-x-2">
+              <Star className="h-5 w-5 text-yellow-400" />
+              <span className="text-sm font-medium">Premium Living</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Welcome Message */}
+      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="mb-12">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
+              Welcome to Braybank Estate
+            </h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+          </div>
+          
+          <div className="bg-white p-12 rounded-3xl shadow-2xl border border-slate-100">
+            <div className="prose prose-lg max-w-none">
+              <p className="text-slate-700 mb-6 text-xl leading-relaxed font-light">
+                This site is maintained as a source of information for Shareholders/Leaseholders and other residents of our exclusive riverside community.
+              </p>
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                Photos and newsletters are accessible by all users; Documents are only accessible to registered Leaseholders.
+              </p>
+              <p className="text-slate-600 mb-8 leading-relaxed">
+                To register for access, send a message to <a href="mailto:admin@braybank.info" className="text-blue-600 hover:text-blue-800 font-medium border-b border-blue-200 hover:border-blue-400 transition-colors">admin@braybank.info</a>.
+              </p>
+              <div className="flex items-center justify-center space-x-4 pt-6 border-t border-slate-200">
+                <div className="text-center">
+                  <p className="text-blue-600 font-medium text-lg">Mike Rawlings</p>
+                  <p className="text-slate-500 text-sm">Estate Administrator</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: "62", label: "Properties", icon: Building2 },
+              { number: "48", label: "Apartments", icon: Home },
+              { number: "14", label: "Townhouses", icon: Building2 },
+              { number: "5", label: "Board Directors", icon: Users }
+            ].map((stat, index) => (
+              <div key={index} className="text-center group">
+                <div className="bg-gradient-to-br from-blue-50 to-slate-50 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100">
+                  <stat.icon className="h-8 w-8 text-blue-600 mx-auto mb-4" />
+                  <div className="text-4xl font-light text-slate-900 mb-2">{stat.number}</div>
+                  <div className="text-slate-600 font-medium">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">About The Estate</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-light leading-relaxed">
+              Discover the history, governance, and community life of our exclusive riverside estate
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+            <div className="space-y-6">
+              <h3 className="text-3xl font-light text-slate-900 mb-8">Our Heritage & Location</h3>
+              <p className="text-slate-600 leading-relaxed font-light">
+                The Braybank Estate is situated on the banks of the River Thames at Bray, about two miles south of the centre of Maidenhead in Berkshire. It is also about one mile from Junction 8/9 of the motorway M4, 13 miles south from Junction 4 of the motorway M40 and about 26 miles to the west of central London.
+              </p>
+              <p className="text-slate-600 leading-relaxed font-light">
+                The estate comprises 62 leasehold properties: 48 apartments and 14 townhouses, with beautifully landscaped gardens. Originally the site of Braymead private house, later the Braymead Court Hotel and Hotel de Paris (1920s-40s), it was redeveloped into the current estate in 1964.
+              </p>
+              <div className="pt-6">
+                <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                  Learn More About Our History
+                </button>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-slate-600/20 rounded-3xl transform rotate-3"></div>
+              <img 
+                src="/Banner.jpg"
+                alt="Braybank Estate" 
+                className="relative rounded-3xl shadow-2xl w-full transform -rotate-1 hover:rotate-0 transition-transform duration-500"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-20">
+            {[
+              {
+                icon: Users,
+                title: "Ownership & Governance",
+                description: "Owned by Braybank Estates Limited, where each leaseholder holds one share. Managed by a volunteer board of elected directors.",
+                color: "blue"
+              },
+              {
+                icon: Award,
+                title: "Property Management",
+                description: "Day-to-day operations handled by John Mortimer Property Management Ltd with dedicated property manager support.",
+                color: "green"
+              },
+              {
+                icon: TrendingUp,
+                title: "Community Life",
+                description: "Residents enjoy community gatherings including summer BBQs and Christmas carols, following clear community guidelines.",
+                color: "purple"
+              }
+            ].map((item, index) => (
+              <div key={index} className="group">
+                <div className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100">
+                  <div className={`bg-gradient-to-br ${
+                    item.color === 'blue' ? 'from-blue-100 to-blue-50' :
+                    item.color === 'green' ? 'from-green-100 to-green-50' :
+                    'from-purple-100 to-purple-50'
+                  } w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <item.icon className={`h-8 w-8 ${
+                      item.color === 'blue' ? 'text-blue-600' :
+                      item.color === 'green' ? 'text-green-600' :
+                      'text-purple-600'
+                    }`} />
+                  </div>
+                  <h3 className="text-xl font-medium text-slate-900 mb-4 text-center">{item.title}</h3>
+                  <p className="text-slate-600 text-center leading-relaxed font-light">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Where We Are Section */}
+          <div className="bg-white p-12 rounded-3xl shadow-2xl border border-slate-100">
+            <h3 className="text-3xl font-light text-slate-900 mb-12 text-center">Where We Are</h3>
+            <div className="grid lg:grid-cols-2 gap-12">
+              <div className="aspect-video rounded-2xl overflow-hidden shadow-lg">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2485.8234567890123!2d-0.7123456789012345!3d51.5123456789012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48767d1234567890%3A0x1234567890abcdef!2sBraybank%20Estate%2C%20Bray%2C%20Maidenhead!5e0!3m2!1sen!2suk!4v1234567890123!5m2!1sen!2suk"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Braybank Estate Location"
+                ></iframe>
+              </div>
+              <div className="space-y-8">
+                <div className="bg-slate-50 p-6 rounded-2xl">
+                  <h4 className="font-medium text-slate-900 mb-4 flex items-center">
+                    <MapPin className="h-5 w-5 text-blue-600 mr-2" />
+                    Estate Address
+                  </h4>
+                  <div className="text-slate-600 space-y-1 font-light">
+                    <p>Braybank Estate</p>
+                    <p>River Thames at Bray</p>
+                    <p>Near Maidenhead</p>
+                    <p>Berkshire, England</p>
+                  </div>
+                </div>
+                <div className="bg-slate-50 p-6 rounded-2xl">
+                  <h4 className="font-medium text-slate-900 mb-4 flex items-center">
+                    <Clock className="h-5 w-5 text-blue-600 mr-2" />
+                    Transport Links
+                  </h4>
+                  <ul className="text-slate-600 space-y-2 font-light">
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      1 mile from M4 Junction 8/9
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      13 miles from M40 Junction 4
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      26 miles west of Central London
+                    </li>
+                    <li className="flex items-center">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full mr-3"></div>
+                      2 miles south of Maidenhead centre
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Do's and Don'ts Section */}
+          <div className="mt-16 bg-gradient-to-r from-blue-600 to-slate-700 p-12 rounded-3xl text-center shadow-2xl">
+            <h3 className="text-2xl font-light text-white mb-6">Community Guidelines</h3>
+            <p className="text-blue-100 text-lg font-light mb-8 max-w-3xl mx-auto">
+              For more detail of the organisation and administration of Braybank, see our comprehensive community guidelines
+            </p>
+            <a 
+              href="https://www.braybank.info/Landlord's%20Regulations%20A4%20V4ma.pdf" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-white text-slate-900 px-8 py-3 rounded-full hover:bg-slate-100 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              View Do's and Don'ts Guide
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Documents Section */}
+      <section id="documents" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">Documents & Resources</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-light leading-relaxed">
+              Access important documents, newsletters, and community resources for Braybank Estate residents
+            </p>
+          </div>
+          
+          {/* Document Categories */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            {[
+              {
+                title: "Board Minutes",
+                description: "Official minutes from board meetings and community decisions.",
+                count: "12 Documents",
+                icon: FileText,
+                color: "blue"
+              },
+              {
+                title: "Newsletters",
+                description: "Community newsletters and important announcements.",
+                count: "8 Documents",
+                icon: FileText,
+                color: "green"
+              },
+              {
+                title: "Guidelines & Policies",
+                description: "Estate guidelines, policies, and community regulations.",
+                count: "6 Documents",
+                icon: Shield,
+                color: "purple"
+              },
+              {
+                title: "Financial Reports",
+                description: "Annual reports, budgets, and financial statements.",
+                count: "4 Documents",
+                icon: TrendingUp,
+                color: "red"
+              }
+            ].map((category, index) => (
+              <div key={index} className="group" onClick={category.title === "Newsletters" ? () => setCurrentPage('newsletters') : undefined}>
+                <div className="bg-gradient-to-br from-slate-50 to-white p-6 rounded-3xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 cursor-pointer">
+                  <div className={`bg-gradient-to-br ${
+                    category.color === 'blue' ? 'from-blue-100 to-blue-50' :
+                    category.color === 'green' ? 'from-green-100 to-green-50' :
+                    category.color === 'purple' ? 'from-purple-100 to-purple-50' :
+                    'from-orange-100 to-orange-50'
+                  } w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <category.icon className={`h-8 w-8 ${
+                      category.color === 'blue' ? 'text-blue-600' :
+                      category.color === 'green' ? 'text-green-600' :
+                      category.color === 'purple' ? 'text-purple-600' :
+                      'text-red-600'
+                    }`} />
+                  </div>
+                  <h3 className="text-lg font-medium text-slate-900 mb-3">{category.title}</h3>
+                  <p className="text-slate-600 mb-4 font-light leading-relaxed text-sm">{category.description}</p>
+                  <p className="text-xs text-slate-500 font-medium">{category.count}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Recent Documents */}
+          <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden">
+            <div className="bg-gradient-to-r from-slate-50 to-blue-50 px-8 py-6 border-b border-slate-200">
+              <h3 className="text-2xl font-light text-slate-900 mb-2">Recent Documents</h3>
+              <p className="text-slate-600 font-light">Latest documents and announcements for residents</p>
+            </div>
+            
+            <div className="p-8">
+              <div className="space-y-4">
+                {[
+                  {
+                    title: "Community Newsletter - January 2024",
+                    type: "Newsletter",
+                    date: "January 15, 2024",
+                    size: "2.4 MB",
+                    description: "Monthly community updates, upcoming events, and important announcements.",
+                    restricted: false
+                  },
+                  {
+                    title: "Board Meeting Minutes - December 2023",
+                    type: "Minutes",
+                    date: "January 10, 2024",
+                    size: "1.8 MB",
+                    description: "Official minutes from the December board meeting covering budget discussions.",
+                    restricted: true
+                  },
+                  {
+                    title: "Estate Guidelines Update",
+                    type: "Guidelines",
+                    date: "January 8, 2024",
+                    size: "3.2 MB",
+                    description: "Updated community guidelines including new parking regulations.",
+                    restricted: true
+                  },
+                  {
+                    title: "Annual Financial Report 2023",
+                    type: "Financial",
+                    date: "December 20, 2023",
+                    size: "4.1 MB",
+                    description: "Comprehensive financial report for the 2023 fiscal year.",
+                    restricted: true
+                  },
+                  {
+                    title: "Christmas Carol Event Photos",
+                    type: "Photos",
+                    date: "December 18, 2023",
+                    size: "12.5 MB",
+                    description: "Photo collection from our annual Christmas carol gathering.",
+                    restricted: false
+                  }
+                ].map((doc, index) => (
+                  <div key={index} className="flex items-center justify-between p-6 bg-gradient-to-r from-slate-50 to-white rounded-2xl border border-slate-100 hover:shadow-lg transition-all duration-300 group">
+                    <div className="flex items-center space-x-4">
+                      <div className="bg-blue-100 p-3 rounded-xl group-hover:bg-blue-200 transition-colors">
+                        <FileText className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center space-x-3 mb-1">
+                          <h4 className="font-medium text-slate-900">{doc.title}</h4>
+                          {doc.restricted && (
+                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                              <Shield className="h-3 w-3 mr-1" />
+                              Residents Only
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-slate-600 mb-2">{doc.description}</p>
+                        <div className="flex items-center space-x-4 text-xs text-slate-500">
+                          <span className="flex items-center">
+                            <Calendar className="h-3 w-3 mr-1" />
+                            {doc.date}
+                          </span>
+                          <span>{doc.size}</span>
+                          <span className="px-2 py-1 bg-slate-100 rounded-full">{doc.type}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      {doc.restricted ? (
+                        <button className="flex items-center px-4 py-2 text-slate-500 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors text-sm">
+                          <Shield className="h-4 w-4 mr-2" />
+                          Login Required
+                        </button>
+                      ) : (
+                        <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm group-hover:shadow-lg">
+                          <Download className="h-4 w-4 mr-2" />
+                          Download
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Access Notice */}
+              <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-slate-50 rounded-2xl border border-blue-100">
+                <div className="flex items-start space-x-3">
+                  <Shield className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <div>
+                    <h4 className="font-medium text-slate-900 mb-2">Document Access</h4>
+                    <p className="text-sm text-slate-600 mb-3">
+                      Some documents are restricted to registered leaseholders only. To access these documents, please log in to your resident account.
+                    </p>
+                    <p className="text-sm text-slate-600">
+                      Need access? Contact <a href="mailto:admin@braybank.info" className="text-blue-600 hover:text-blue-800 font-medium">admin@braybank.info</a> to register for an account.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Directors Section */}
+      <section id="directors" className="py-24 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">Board of Directors</h2>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mb-8"></div>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto font-light leading-relaxed">
+              The following resident Shareholders constitute the Board of Directors of Braybank Estates Limited
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+            {[
+              {
+                name: "Richard Severn",
+                role: "Chair",
+                image: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=400",
+                experience: "Community leadership & estate governance"
+              },
+              {
+                name: "Peter Hill",
+                role: "Stewardship",
+                image: "https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg?auto=compress&cs=tinysrgb&w=400",
+                experience: "Estate stewardship & maintenance oversight"
+              },
+              {
+                name: "Gloria Kinghorn",
+                role: "Health & Safety",
+                image: "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=400",
+                experience: "Health & safety compliance & resident welfare"
+              },
+              {
+                name: "Margit Walker",
+                role: "Secretary",
+                image: "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=400",
+                experience: "Board administration & resident communications"
+              },
+              {
+                name: "Oscar Wingham",
+                role: "Treasurer",
+                image: "https://images.pexels.com/photos/3760069/pexels-photo-3760069.jpeg?auto=compress&cs=tinysrgb&w=400",
+                experience: "Financial management & budgeting"
+              }
+            ].map((member, index) => (
+              <div key={index} className="group">
+                <div className="bg-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100">
+                  <div className="relative mb-6">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-24 h-24 rounded-full mx-auto object-cover shadow-lg group-hover:scale-110 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-t from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <h3 className="text-lg font-medium text-slate-900 mb-2">{member.name}</h3>
+                  <p className="text-blue-600 font-medium mb-3">{member.role}</p>
+                  <p className="text-slate-600 text-sm font-light leading-relaxed">{member.experience}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">Get in Touch</h2>
+            <div className="w-24 h-1 bg-blue-400 mx-auto mb-8"></div>
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto font-light leading-relaxed">
+              Questions about the Braybank Estate? Contact our property management team or board of directors for assistance with community matters.
+            </p>
+          </div>
+          
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div>
+              <div className="space-y-8">
+                {[
+                  {
+                    icon: MapPin,
+                    title: "Estate Location",
+                    content: "River Thames at Bray, near Maidenhead, Berkshire"
+                  },
+                  {
+                    icon: Phone,
+                    title: "Property Management",
+                    content: "John Mortimer Property Management Ltd"
+                  },
+                  {
+                    icon: Mail,
+                    title: "Estate Administration",
+                    content: "admin@braybank.info"
+                  },
+                  {
+                    icon: Clock,
+                    title: "Access Codes",
+                    content: "Available from admin@braybank.info"
+                  }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start group">
+                    <div className="bg-blue-600/20 p-3 rounded-2xl mr-4 group-hover:bg-blue-600/30 transition-colors duration-300">
+                      <item.icon className="h-6 w-6 text-blue-400" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-lg mb-1">{item.title}</p>
+                      <p className="text-slate-300 font-light">{item.content}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20">
+              <h3 className="text-2xl font-light mb-8">Contact Estate Management</h3>
+              <form className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <input 
+                    type="text" 
+                    placeholder="First Name" 
+                    className="px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-slate-300 backdrop-blur-sm"
+                  />
+                  <input 
+                    type="text" 
+                    placeholder="Last Name" 
+                    className="px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-slate-300 backdrop-blur-sm"
+                  />
+                </div>
+                <input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-slate-300 backdrop-blur-sm"
+                />
+                <input 
+                  type="tel" 
+                  placeholder="Phone Number" 
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-slate-300 backdrop-blur-sm"
+                />
+                <select className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-white backdrop-blur-sm">
+                  <option className="text-slate-900">Select Inquiry Type</option>
+                  <option className="text-slate-900">Leaseholder Inquiry</option>
+                  <option className="text-slate-900">Maintenance Request</option>
+                  <option className="text-slate-900">Board/Community Matter</option>
+                  <option className="text-slate-900">Access Codes</option>
+                  <option className="text-slate-900">Community Guidelines</option>
+                </select>
+                <textarea 
+                  placeholder="How can we help you?" 
+                  rows={4}
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-white placeholder-slate-300 backdrop-blur-sm resize-none"
+                ></textarea>
+                <button 
+                  type="submit" 
+                  className="w-full bg-blue-600 text-white py-3 rounded-2xl hover:bg-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            <div>
+              <div className="flex items-center mb-6">
+                <div className="text-lg font-medium text-white">Braybank Estate</div>
+              </div>
+              <p className="text-slate-400 text-sm font-light leading-relaxed">
+                An exclusive private residential leasehold estate situated on the banks of the River Thames at Bray, Berkshire.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-medium mb-6">Quick Links</h4>
+              <ul className="space-y-3 text-sm text-slate-400">
+                <li><a href="#about" className="hover:text-white transition-colors font-light">About the Estate</a></li>
+                <li><a href="#directors" className="hover:text-white transition-colors font-light">Board of Directors</a></li>
+                <li><a href="#documents" className="hover:text-white transition-colors font-light">Documents</a></li>
+                <li><a href="#" className="hover:text-white transition-colors font-light">Community Events</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-6">Resident Resources</h4>
+              <ul className="space-y-3 text-sm text-slate-400">
+                <li><a href="#" className="hover:text-white transition-colors font-light">Board Minutes</a></li>
+                <li><a href="#" className="hover:text-white transition-colors font-light">Community Guidelines</a></li>
+                <li><a href="#" className="hover:text-white transition-colors font-light">Lease Information</a></li>
+                <li><a href="https://www.braybank.info/Landlord's%20Regulations%20A4%20V4ma.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-light">Do's & Don'ts Guide</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-6">Contact</h4>
+              <ul className="space-y-3 text-sm text-slate-400">
+                <li><a href="mailto:admin@braybank.info" className="hover:text-blue-400 transition-colors font-light">admin@braybank.info</a></li>
+                <li className="font-light">John Mortimer Property Management Ltd</li>
+                <li className="font-light">Porter/Groundsman on-site</li>
+                <li className="font-light">Access codes available via email</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-slate-700 pt-8 text-center text-sm text-slate-400">
+            <p className="font-light">&copy; Copyright 2025 Braybank Estates Ltd. All rights reserved.</p>
+            <p className="mt-2 font-light">Designed by <a href="https://www.essateric.com" className="hover:text-blue-400 transition-colors">Essateric Solutions</a></p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;

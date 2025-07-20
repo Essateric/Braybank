@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Users,
-  TrendingUp,
-  FileText,
-  Shield,
-  Building2,
-  Home,
-  Calendar,
-  Download,
-  MapPin,
-  Phone,
-  Mail,
-  Clock
-} from 'lucide-react';
+import { ArrowRight, Users, TrendingUp, Award, Phone, Mail, MapPin, Clock, Menu, X, Home, Info, FileText, UserCheck, MessageSquare, Star, Shield, Leaf, Building2, Calendar, ChevronDown, Download } from 'lucide-react';
 import AdminApp from './components/AdminApp';
 import { useSpring, animated } from '@react-spring/web';
-import { HeroDemo1 } from './components/blocks/demo';
-import AboutSection from './components/blocks/about';
-
+import { motion, useScroll, useTransform } from "framer-motion";
+import { HeroDemo1 } from "./components/blocks/demo";
+import { AboutSection } from "./components/blocks/about";
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
 
   useEffect(() => {
@@ -38,25 +27,29 @@ function App() {
     }
   }, []);
 
+  const fadeInButtons = useSpring({ from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 }, delay: 200 });
+
   const stats = [
-    { number: '62', label: 'Properties', icon: Building2 },
-    { number: '48', label: 'Apartments', icon: Home },
-    { number: '14', label: 'Townhouses', icon: Building2 },
-    { number: '5', label: 'Board Directors', icon: Users }
+    { number: "62", label: "Properties", icon: Building2 },
+    { number: "48", label: "Apartments", icon: Home },
+    { number: "14", label: "Townhouses", icon: Building2 },
+    { number: "5", label: "Board Directors", icon: Users }
   ];
 
-  const statAnimations = stats.map((_, index) =>
+  const statAnimations = stats.map((_, index) => (
     useSpring({ from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0 }, delay: index * 200 })
-  );
+  ));
 
   if (showAdmin) return <AdminApp />;
 
   return (
     <div>
-      <div className="overflow-x-hidden">
-        <HeroDemo1 />
-      </div>
+      {/* Inside your Hero Section button JSX */}
+          <div className="overflow-x-hidden">
+      <HeroDemo1 />
+    </div>
 
+      {/* Stats Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -73,8 +66,12 @@ function App() {
         </div>
       </section>
 
+      {/* About Section */}
+   <div>
+      {/* Inside your Hero Section button JSX */}
+          <div className="overflow-x-hidden">
       <AboutSection />
-
+    </div>
 
       {/* Documents Section */}
       <section id="documents" className="py-24 bg-white">
@@ -466,7 +463,7 @@ function App() {
         </div>
       </footer>
     </div>
-  );  
+  );
 }
 
 export default App;

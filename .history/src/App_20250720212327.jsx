@@ -16,8 +16,7 @@ import {
 import AdminApp from './components/AdminApp';
 import { useSpring, animated } from '@react-spring/web';
 import { HeroDemo1 } from './components/blocks/demo';
-import AboutSection from './components/blocks/about';
-
+import { AboutSection } from './components/blocks/about';
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
