@@ -21,12 +21,9 @@ import StatsSection from './components/blocks/stats';
 
 
 
-
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
-  const [scrolled, setScrolled] = useState(false);
-
 
   useEffect(() => {
     const handleScroll = () => {

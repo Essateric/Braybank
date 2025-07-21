@@ -37,14 +37,14 @@ function AboutSection() {
       </div>
 
       {/* Overlay Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-black">
         {/* Heading */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight text-black">
+          <h2 className="text-4xl md:text-5xl font-light mb-6 tracking-tight">
             About The Estate
           </h2>
           <div className="w-24 h-1 bg-blue-400 mx-auto mb-8"></div>
-          <p className="text-xl text-black/90 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto font-light leading-relaxed">
             Discover the history, governance, and community life of our exclusive riverside estate
           </p>
         </div>
@@ -60,7 +60,7 @@ function AboutSection() {
               The estate comprises 62 leasehold properties: 48 apartments and 14 townhouses, with beautifully landscaped gardens...
             </p>
             <div className="pt-6">
-              <button className="bg-blue-600 text-black px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+              <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                 Learn More About Our History
               </button>
             </div>
@@ -73,7 +73,7 @@ function AboutSection() {
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((item, index) => (
             <div key={index} className="group">
-              <div className="bg-black/10 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20 backdrop-blur-md">
+              <div className="bg-white/10 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20 backdrop-blur-md">
                 <div
                   className={`bg-gradient-to-br ${
                     item.color === "blue"
@@ -93,8 +93,8 @@ function AboutSection() {
                     }`}
                   />
                 </div>
-                <h3 className="text-xl font-medium text-black text-center mb-4">{item.title}</h3>
-                <p className="text-black/90 text-center leading-relaxed font-light">
+                <h3 className="text-xl font-medium text-white text-center mb-4">{item.title}</h3>
+                <p className="text-white/90 text-center leading-relaxed font-light">
                   {item.description}
                 </p>
               </div>

@@ -40,8 +40,8 @@ function HeroDemo1() {
   const visibleImages = IMAGES.slice(index, index + 5);
 
   return (
-    <ContainerScroll className="relative h-[110vh]">
-      <BentoGrid className="sticky left-0 top-0 z-0 h-screen w-full p-3">
+    <ContainerScroll className="h-[100vh]">
+      <BentoGrid className="sticky left-0 top-0 z-0 h-screen w-full p-4">
         {visibleImages.map((url, i) => (
           <BentoCell key={i} className="overflow-hidden rounded-xl shadow-xl">
             <img src={url} alt="" className="size-full object-cover object-center" />

@@ -17,16 +17,11 @@ import AdminApp from './components/AdminApp';
 import { useSpring, animated } from '@react-spring/web';
 import { HeroDemo1 } from './components/blocks/demo';
 import AboutSection from './components/blocks/about';
-import StatsSection from './components/blocks/stats';
-
-
 
 
 function App() {
   const [showAdmin, setShowAdmin] = useState(false);
   const [currentPage, setCurrentPage] = useState('home');
-  const [scrolled, setScrolled] = useState(false);
-
 
   useEffect(() => {
     const handleScroll = () => {

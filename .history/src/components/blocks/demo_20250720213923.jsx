@@ -40,8 +40,8 @@ function HeroDemo1() {
   const visibleImages = IMAGES.slice(index, index + 5);
 
   return (
-    <ContainerScroll className="relative h-[110vh]">
-      <BentoGrid className="sticky left-0 top-0 z-0 h-screen w-full p-3">
+    <ContainerScroll className="h-[120vh]">
+      <BentoGrid className="sticky left-0 top-0 z-0 h-screen w-full p-4">
         {visibleImages.map((url, i) => (
           <BentoCell key={i} className="overflow-hidden rounded-xl shadow-xl">
             <img src={url} alt="" className="size-full object-cover object-center" />
@@ -54,18 +54,17 @@ function HeroDemo1() {
         <p className="my-6 max-w-xl text-sm text-slate-700 md:text-base">
           Exclusive riverside living with private ownership
         </p>
-      <div className="mt-6 text-center">
-  <a
-    href="?admin=true"
-    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
-  >
-    Login to Admin
-  </a>
-  <div className="mt-10 flex flex-col items-center animate-bounce">
-    <p className="text-sm text-slate-500">Scroll to explore</p>
-    <ChevronDown className="h-6 w-6 text-blue-500" />
-  </div>
+        <div className="flex items-center justify-center gap-4">
+          <Button className="bg-indigo-500 px-4 py-2 font-medium hover:bg-indigo-400">
+            Get Started
+          </Button>
+          <Button variant="link" className="bg-transparent px-4 py-2 font-medium">
+            Learn more
+          </Button>
+          <div className="mt-10 flex justify-center animate-bounce">
+  <ChevronDown className="h-6 w-6 text-blue-600" />
 </div>
+        </div>
       </ContainerScale>
     </ContainerScroll>
   );
