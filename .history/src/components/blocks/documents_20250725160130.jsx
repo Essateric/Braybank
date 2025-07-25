@@ -85,7 +85,7 @@ export default function DocumentsSection({ setCurrentPage }) {
   ];
 
   return (
-    <section id="documents" className=" bg-white relative py-24 text-black px-4 sm:px-6 lg:px-8">
+    <section id="documents" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-semibold text-blue-900 mb-6 tracking-tight animate-fade-in-up">
@@ -99,6 +99,12 @@ export default function DocumentsSection({ setCurrentPage }) {
 
         {/* Document Categories */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-20">
+           <a
+    href="?admin=true"
+    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
+  >
+    Login to Admin
+  </a>
           {categories.map((category, index) => (
             <div
               key={index}
