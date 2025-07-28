@@ -102,23 +102,23 @@ function AboutSection() {
           ))}
         </div>
       </div>
-<div className="bg-white border border-slate-200 shadow-md py-6 px-7 rounded-xl max-w-2xl mx-auto mb-8">
-  <p className="text-base font-medium mb-2 text-blue-700">
+      <div className="bg-[#3a3a3a] py-8 px-6 rounded-xl max-w-2xl mx-auto mb-8 shadow-md">
+  <p className="text-lg font-medium mb-3 text-white">
     <a
       href="https://www.braybank.info/"
-      className="underline hover:text-blue-500"
+      className="underline text-blue-200 hover:text-blue-400"
       target="_blank"
       rel="noopener noreferrer"
     >
       8 February 2021
     </a>
   </p>
-  <p className="text-[15px] text-gray-700 leading-relaxed">
+  <p className="text-base text-gray-100 leading-relaxed">
     Our thanks once again to Rex Dixon of no 39 for two sets of photos.
     These cover{' '}
     <a
       href="https://www.braybank.info/footpaths2019.html"
-      className="underline text-blue-600 hover:text-blue-800 font-medium"
+      className="underline font-semibold text-yellow-300 hover:text-yellow-200"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -127,7 +127,7 @@ function AboutSection() {
     back in July 2019, and also some{' '}
     <a
       href="https://www.braybank.info/more%20winter/winters2010.11.html"
-      className="underline text-blue-600 hover:text-blue-800 font-medium"
+      className="underline font-semibold text-yellow-300 hover:text-yellow-200"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -136,7 +136,6 @@ function AboutSection() {
     .
   </p>
 </div>
-
 
     </section>
   );
