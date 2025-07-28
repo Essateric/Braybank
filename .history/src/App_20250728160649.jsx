@@ -17,12 +17,13 @@ import AdminApp from './components/AdminApp';
 import { useSpring, animated } from '@react-spring/web';
 import { HeroDemo1 } from './components/blocks/demo';
 import AboutSection from './components/blocks/about';
+import StatsSection from './components/blocks/stats';
 import DocumentsSection from './components/blocks/documents';
 import DirectorsSection from './components/blocks/directors';
 import ContactSection from './components/blocks/contact';
 import Footer from './components/blocks/footer';
 import NavBar from "./components/blocks/NavBar"; // Adjust path if needed
-import Hero from "./components/blocks/hero"; // Adjust path if needed
+import NavBar from "./components/blocks/Hero"; // Adjust path if needed
 
 
 
@@ -47,6 +48,17 @@ function App() {
     }
   }, []);
 
+  const stats = [
+    { number: '62', label: 'Properties', icon: Building2 },
+    { number: '48', label: 'Apartments', icon: Home },
+    { number: '14', label: 'Townhouses', icon: Building2 },
+    { number: '5', label: 'Board Directors', icon: Users }
+  ];
+
+  const statAnimations = stats.map((_, index) =>
+    useSpring({ from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0 }, delay: index * 200 })
+  );
+
   if (showAdmin) return <AdminApp />;
 
   return (
@@ -54,10 +66,12 @@ function App() {
     {/* <div className="overflow-x-hidden">
       <HeroDemo1 />
     </div> */}
-    <Hero />
+    <
     <NavBar />
     <AboutSection />
     <DirectorsSection />
+
+    <StatsSection />  {/* ✅ Replaces the old hardcoded stats section */}
 
 <DocumentsSection setCurrentPage={setCurrentPage} />
 

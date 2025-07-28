@@ -47,6 +47,17 @@ function App() {
     }
   }, []);
 
+  const stats = [
+    { number: '62', label: 'Properties', icon: Building2 },
+    { number: '48', label: 'Apartments', icon: Home },
+    { number: '14', label: 'Townhouses', icon: Building2 },
+    { number: '5', label: 'Board Directors', icon: Users }
+  ];
+
+  const statAnimations = stats.map((_, index) =>
+    useSpring({ from: { opacity: 0, y: 30 }, to: { opacity: 1, y: 0 }, delay: index * 200 })
+  );
+
   if (showAdmin) return <AdminApp />;
 
   return (

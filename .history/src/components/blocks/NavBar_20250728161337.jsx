@@ -18,7 +18,7 @@ function Navbar() {
               <a href="/shareholders" className="hover:underline">BEL Shareholders</a>
               {/* Dropdown */}
               <div className="absolute left-0 mt-2 hidden group-hover:block bg-white shadow-md rounded">
-                <a href="#directors" className="block px-4 py-2 hover:bg-slate-100">BEL Board of Directors</a>
+                <a href="/shareholders/board" className="block px-4 py-2 hover:bg-slate-100">BEL Board of Directors</a>
               </div>
             </li>
             <li><a href="/events">Events</a></li>
