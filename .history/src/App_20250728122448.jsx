@@ -62,9 +62,9 @@ function App() {
 
   return (
   <div>
-    {/* <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <HeroDemo1 />
-    </div> */}
+    </div>
     <NavBar />
     <AboutSection />
     <DirectorsSection />

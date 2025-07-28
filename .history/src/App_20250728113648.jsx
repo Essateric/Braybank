@@ -21,9 +21,7 @@ import StatsSection from './components/blocks/stats';
 import DocumentsSection from './components/blocks/documents';
 import DirectorsSection from './components/blocks/directors';
 import ContactSection from './components/blocks/contact';
-import Footer from './components/blocks/footer';
-import NavBar from "./components/blocks/NavBar"; // Adjust path if needed
-
+import Footer from './components/blocks/footer';s
 
 
 function App() {
@@ -62,10 +60,10 @@ function App() {
 
   return (
   <div>
-    {/* <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden">
       <HeroDemo1 />
-    </div> */}
-    <NavBar />
+    </div>
+    
     <AboutSection />
     <DirectorsSection />
 
