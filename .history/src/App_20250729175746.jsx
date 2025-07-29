@@ -58,7 +58,6 @@ function App() {
     <Hero />
     <NavBar />
     <AboutSection />
-     <HistorySection />
     <DirectorsSection />
 
 <DocumentsSection setCurrentPage={setCurrentPage} />

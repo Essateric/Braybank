@@ -21,33 +21,52 @@ function AboutSection() {
       </div>
       {/* ------------------------------- */}
 
-<div className="flex justify-center w-full mt-10">
-  <div className="border-4 border-[#F7C873] rounded-xl bg-white shadow-lg px-8 py-8 max-w-3xl w-full text-center">
-    <h2 className="text-3xl font-semibold text-[#F7C873] mb-6 text-center">
-      About The Braybank Estate
-    </h2>
-    <p className="mb-4 text-gray-800 text-base">
-      The Braybank Estate is situated on the banks of the River Thames at Bray, about two miles south of the centre of Maidenhead in Berkshire. It is also about one mile from Junction 8/9 of the motorway M4, 13 miles south from Junction 4 of the motorway M40 and about 26 miles to the west of central London.
-    </p>
-    <p className="mb-4 text-gray-800 text-base">
-      It is an estate containing 62 properties of which 14 are town houses and 48 flats. A panoramic view of the East wing of the estate is shown at the top of the page. To the right is a view up the river from the Hard.
-    </p>
-    <div className="text-left md:text-center">
-      <div className="mb-2">
-        <span className="font-semibold">Board of Directors:</span> Up to seven elected directors – <a href="#directors" className="text-blue-600 underline">see current directors</a>. Access codes from <a href="mailto:admin@braybank.info" className="text-blue-600 underline">admin@braybank.info</a>.
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center md:items-start gap-10">
+        {/* Left: Main About Content */}
+        <div className="md:w-2/3">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#F7C873] mb-4">
+            About The Braybank Estate
+          </h2>
+          <p className="text-lg text-gray-800 mb-6 leading-relaxed">
+            The Braybank Estate is situated on the banks of the River Thames at Bray, about two miles south of the centre of Maidenhead in Berkshire. 
+            It is also about one mile from Junction 8/9 of the motorway M4, 13 miles south from Junction 4 of the motorway M40 and about 26 miles to the west of central London.
+          </p>
+          <p className="mb-4 text-gray-700">
+            It is an estate containing 62 properties of which 14 are town houses and 48 flats. A panoramic view of the East wing of the estate is shown at the top of the page. To the right is a view up the river from the Hard.
+          </p>
+          <div className="mt-6 space-y-3 text-[16px]">
+            <div>
+              <span className="font-semibold text-gray-800">Board of Directors:</span> Up to seven elected directors – 
+              <a href="#directors" className="text-blue-600 underline mx-1">see current directors</a>. 
+              Access codes from <a href="mailto:admin@braybank.info" className="text-blue-600 underline">admin@braybank.info</a>.
+            </div>
+            <div>
+              <span className="font-semibold text-gray-800">Managing Agents:</span> Cleaver Property Management Ltd, Charley Howdle (Property Manager) Tel: 0118 972 7182.
+            </div>
+            <div>
+              Residents’ BBQ sometimes held in summer. <a href="#gallery" className="text-blue-600 underline">See pictures</a>.
+            </div>
+          </div>
+          <div className="mt-8">
+            <a
+              href="#"
+              className="bg-blue-600 text-white px-7 py-3 rounded-full font-medium hover:bg-blue-700 transition-all shadow-md"
+            >
+              Braybank "Do’s and Don’ts" booklet
+            </a>
+          </div>
+        </div>
+
+        {/* Right: Main About Image
+        <div className="md:w-1/3 flex-shrink-0">
+          <img
+            src="/about.jpeg"
+            alt="View from the Hard"
+            className="rounded-lg shadow-xl w-full h-auto object-cover"
+            style={{ minHeight: "260px", maxHeight: "330px" }}
+          />
+        </div> */}
       </div>
-      <div className="mb-2">
-        <span className="font-semibold">Managing Agents:</span> Cleaver Property Management Ltd, Charley Howdle (Property Manager) Tel: 0118 972 7182.
-      </div>
-      <div className="mb-4">
-        Residents’ BBQ sometimes held in summer. <a href="#gallery" className="text-blue-600 underline">See pictures</a>.
-      </div>
-    </div>
-    <button className="bg-blue-600 text-white px-7 py-2 rounded-full font-medium hover:bg-blue-700 transition-all shadow-md">
-      Braybank "Do’s and Don’ts" booklet
-    </button>
-  </div>
-</div>
 
       {/* Features Section */}
       <div className="relative z-10 max-w-6xl mx-auto mt-16 px-4 sm:px-8">
@@ -103,35 +122,6 @@ function AboutSection() {
           ))}
         </div>
       </div>
-      {/* --- Start of Additional History Info --- */}
-<div className="mt-10 bg-blue-50 border border-blue-100 rounded-xl shadow px-6 py-7 text-center max-w-2xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-semibold text-blue-900 mb-6 tracking-tight animate-fade-in-up">
-           History of Braybank
-          </h2>
-  <p className="text-base text-gray-800 mb-4">
-    The current Braybank estate was built in 1964 on the old hotel's site.<br />
-    <span className="text-gray-600 text-sm">
-      (With acknowledgements to ‘Bray – Today and Yesterday’ by Nan Birney)
-    </span>
-  </p>
-  <p className="mb-3 text-gray-700">
-    We have managed to obtain from a resident, a brochure which details some further
-    history of the estate from the 1950’s.
-    <br />
-    <span>Click an image below to enlarge the photos.</span>
-  </p>
-  {/* If you have brochure images, insert them here */}
-  {/* Example: <img src="/brochure1.jpg" alt="Brochure" className="inline-block w-32 mx-2 rounded shadow" /> */}
-  <div className="mt-4">
-    <a
-      href="mailto:admin@braybank.info?subject=Request%20Brochure%20Images"
-      className="inline-block bg-blue-700 text-white px-5 py-2 rounded-full font-medium shadow hover:bg-blue-800 transition"
-    >
-      Request download of images
-    </a>
-  </div>
-</div>
-
     </section>
   );
 }

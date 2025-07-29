@@ -105,9 +105,6 @@ function AboutSection() {
       </div>
       {/* --- Start of Additional History Info --- */}
 <div className="mt-10 bg-blue-50 border border-blue-100 rounded-xl shadow px-6 py-7 text-center max-w-2xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-semibold text-blue-900 mb-6 tracking-tight animate-fade-in-up">
-           History of Braybank
-          </h2>
   <p className="text-base text-gray-800 mb-4">
     The current Braybank estate was built in 1964 on the old hotel's site.<br />
     <span className="text-gray-600 text-sm">

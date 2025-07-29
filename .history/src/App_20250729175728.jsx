@@ -23,7 +23,7 @@ import ContactSection from './components/blocks/contact';
 import Footer from './components/blocks/footer';
 import NavBar from "./components/blocks/NavBar"; // Adjust path if needed
 import Hero from "./components/blocks/hero"; // Adjust path if needed
-import HistorySection from "./components/blocks/history";
+import HistorySection from "./components/blocks/HistorySection";
 
 
 
@@ -58,7 +58,6 @@ function App() {
     <Hero />
     <NavBar />
     <AboutSection />
-     <HistorySection />
     <DirectorsSection />
 
 <DocumentsSection setCurrentPage={setCurrentPage} />
