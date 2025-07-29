@@ -55,7 +55,7 @@ function Navbar() {
                {openDropdown === "directors" && (
                 <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white shadow-lg rounded min-w-[170px] border border-slate-200 z-30">
     <a href="#directors" className="block px-4 py-2 text-black hover:bg-blue-100">BEL Board of Directors</a>
-    <a href="/documents" className="block px-4 py-2 text-black hover:bg-blue-100">Documents</a>
+    <a href="#documents" className="block px-4 py-2 text-black hover:bg-blue-100">Documents</a>
                 </div>
               )}
 </li>

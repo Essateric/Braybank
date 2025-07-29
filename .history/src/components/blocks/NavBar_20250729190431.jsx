@@ -44,20 +44,12 @@ function Navbar() {
               )}
             </li>
             {/* BEL Shareholders with Dropdown */}
-           <li className="relative">
-            <button
-                type="button"
-                className="hover:underline focus:outline-none"
-                onClick={() => setOpenDropdown(openDropdown === "directors" ? null : "directors")}
-              >
-                BEL Shareholders
-              </button>
-               {openDropdown === "directors" && (
-                <div className="absolute left-1/2 -translate-x-1/2 mt-2 bg-white shadow-lg rounded min-w-[170px] border border-slate-200 z-30">
+           <li className="relative group">
+  <a href="/shareholders" className="hover:underline">BEL Shareholders</a>
+  <div className="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded border border-slate-200 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition z-30">
     <a href="#directors" className="block px-4 py-2 text-black hover:bg-blue-100">BEL Board of Directors</a>
     <a href="/documents" className="block px-4 py-2 text-black hover:bg-blue-100">Documents</a>
-                </div>
-              )}
+  </div>
 </li>
             <li><a href="/events">Events</a></li>
             <li><a href="/newsletters">Newsletters</a></li>
